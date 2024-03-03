@@ -32,15 +32,15 @@ Asegúrate de tener instalados los siguientes requisitos previos antes de comenz
 
 Crear archivos .env y .docker.env con el siguiente formato:
 
-DB_URI= Uri de la base de datos Mongo. En el caso de .docker.env utilizará "mongodb://mongo_db:27017/nombre_de_db"
-NODE_PORT= puerto donde se ejecuta la aplicación. Por defecto 8082
-APPLICATION= tipo de aplicación que se utilizará. Por defecto Express Js ("AppExpress")
-DB= adaptador del tipo de ODM que se utilizará. Por defecto Mongoose ("MongooseAdapter")
-JWT_PRIVATE_KEY= Clave secreta que se utilizará en la creación de tokens
-SMTP_EMAIL= Mail que se utilizará en Nodemailer
-SMTP_KEY= App Key que se utilizará en Nodemailer
-URL= Url que en la cual se ejecutará la app. Por defecto localhost:8082
-STRIPE_PRIVATE_KEY= Clava secreta que se utilizará para el servicio Stripe
+- DB_URI= Uri de la base de datos Mongo. En el caso de .docker.env utilizará "mongodb://mongo_db:27017/nombre_de_db"
+- NODE_PORT= puerto donde se ejecuta la aplicación. Por defecto 8082
+- APPLICATION= tipo de aplicación que se utilizará. Por defecto Express Js ("AppExpress")
+- DB= adaptador del tipo de ODM que se utilizará. Por defecto Mongoose ("MongooseAdapter")
+- JWT_PRIVATE_KEY= Clave secreta que se utilizará en la creación de tokens
+- SMTP_EMAIL= Mail que se utilizará en Nodemailer
+- SMTP_KEY= App Key que se utilizará en Nodemailer
+- URL= Url que en la cual se ejecutará la app. Por defecto localhost:8082
+- STRIPE_PRIVATE_KEY= Clava secreta que se utilizará para el servicio Stripe
 
 Se crearon los archivos .example.env y .example.docker.env como ejemplos
 
