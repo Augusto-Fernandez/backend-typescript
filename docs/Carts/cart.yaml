@@ -1,0 +1,321 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Get all carts - Admin only
+      tags:
+        - Cart
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  [
+                    {
+                      items: [],
+                      enable: true,
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    },
+                    {
+                      items: [],
+                      enable: true,
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    },
+                    {
+                      items: [],
+                      enable: true,
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    }
+                  ]
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+    post:
+      summary: "Create Cart"
+      tags:
+       - Cart
+      responses: 
+        "201":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    items: [],
+                    enable: true,
+                    _id: 'Id generated',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+  /api/carts/{id}:
+    get:
+      summary: Get a cart
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: id
+          description: 'Cart Id'
+          type: string
+          readOnly: true
+      responses: 
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                    {
+                      items: [],
+                      enable: true,
+                      _id: 'Cart Id',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+    put:
+      summary: Update cart
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: id
+          description: 'Cart Id'
+          type: string
+          readOnly: true
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                [
+                  {
+                    id: "Product Id 1",
+                    quantity: 2
+                  },
+                  {
+                    id: "Product Id 2",
+                    quantity: 1
+                  }
+                ]
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    items: [
+                      {
+                        id: "Product Id 1",
+                        quantity: 2
+                      },
+                      {
+                        id: "Product Id 2",
+                        quantity: 1
+                      }
+                    ],
+                      enable: true,
+                      _id: 'Cart Id',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format / invalid type"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404/ Cart id":
+          description: "Not Found Id"
+        "404/ Product Id":
+          description: "Not Found Product Id"
+        "404/ Product already in Cart":
+          description: "Product Already Added"
+        "500":
+          description: "Error"
+    delete:
+      summary: Delete cart products
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: id
+          description: 'Cart Id'
+          type: string
+          readOnly: true
+      responses: 
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    items: [],
+                    enable: true,
+                    _id: 'Cart Id',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "404/ Empty Cart":
+          description: "Not Found Products in Cart"
+        "500":
+          description: "Error"
+  /api/carts/{id}/cart:
+    delete:
+      summary: Delete Cart - Admin Only
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: id
+          description: 'Cart Id'
+          type: string
+          readOnly: true
+      responses: 
+        "200":
+          description: "Success"
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+  /api/carts/{id}/products/{pid}:
+    put:
+      summary: Add Product to Cart
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: id
+          description: 'Cart Id'
+          type: string
+          readOnly: true 
+        - in: path
+          name: pid
+          description: 'Product Id'
+          type: string
+          readOnly: true
+      responses: 
+        "201":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    items: [
+                      {id: "Product Id", quantity: 1}
+                    ],
+                    enable: true,
+                    _id: 'Cart Id',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404/ Cart Id":
+          description: "Not Found Id"
+        "404/ Product Id":
+          description: "Not Found Product Id"
+        "500":
+          description: "Error"
+    delete:
+      summary: Add Product to Cart
+      tags:
+        - Cart
+      parameters:
+        - in: path
+          name: id
+          description: 'Cart Id'
+          type: string
+          readOnly: true 
+        - in: path
+          name: pid
+          description: 'Product Id'
+          type: string
+          readOnly: true
+      responses: 
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    items: [],
+                    enable: true,
+                    _id: 'Cart Id',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404/ Cart Id":
+          description: "Not Found Id"
+        "404/ Product Id":
+          description: "Not Found Product Id"
+        "404/ Not in Cart":
+          description: "Not Found Product in Cart"
+        "500":
+          description: "Error"     
+                

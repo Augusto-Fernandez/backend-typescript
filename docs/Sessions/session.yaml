@@ -1,0 +1,235 @@
+paths:
+  /api/sessions/login:
+    post:
+      summary: Log In
+      tags:
+        - Session
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  email: "example@gmail.com",
+                  password: "12345678"
+                }
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    message: "Login Success",
+                    sessionLogin: "token"
+                  }
+        "400":
+          description: "ZodError: invalid type"
+        "404/email":
+          description: "Not Found User Email"
+        "404/password":
+          description: "Invalid password"
+        "500":
+          description: "Error"
+  /api/sessions/signup:
+    post:
+      summary: Sign Up
+      tags:
+        - Session
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  userName: "example",
+                  email: "example@gmail.com",
+                  password: "12345678"
+                }
+      responses:
+        "201":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    userName: "example",
+                    email: "example@gmail.com",
+                    cart: [],
+                    role: [],
+                    isAdmin: false,
+                    password: "encrypted password",
+                    last_connection: "last connection date",
+                    _id: "Id generated",
+                    createdAt: "doc creation date",
+                    updatedAt: "doc last update",
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid type"
+        "404":
+          description: "Email already used"
+        "500":
+          description: "Error"
+  /api/sessions/current:
+    get:
+      summary: Current
+      tags:
+        - Session  
+      security:
+        - bearerAuth: "token"
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    status: "Success",
+                    payload: {
+                      _doc: {
+                        userName: "example",
+                        email: "example@gmail.com",
+                        cart: [],
+                        role: [],
+                        isAdmin: false,
+                        password: "encrypted password",
+                        last_connection: "last connection date",
+                        _id: "Id generated",
+                        createdAt: "doc creation date",
+                        updatedAt: "doc last update",
+                        __v: "doc version"
+                      }
+                    }
+                  }
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "403":
+          description: "Authentication Error"
+        "500":
+          description: "Error"
+  /api/sessions/change-password:
+    post:
+      summary: Change Password
+      tags:
+        - Session
+      security:
+        - bearerAuth: "token"
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  password: "12345678"
+                }
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    status: "Success",
+                    changePassword: {
+                      userName: "example",
+                      email: "example@gmail.com",
+                      cart: [],
+                      role: [],
+                      isAdmin: false,
+                      password: "encrypted password",
+                      last_connection: "last connection date",
+                      _id: "Id generated",
+                      createdAt: "doc creation date",
+                      updatedAt: "doc last update",
+                      __v: "doc version"
+                    },
+                    message: "User changed password"
+                  }
+        "400":
+          description: "ZodError: invalid type"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+  /api/sessions/forgot-password:
+    post:
+      summary: Forgot Password
+      tags:
+        - Session
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  email: "example@gmail.com"
+                }
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    status: "Success",
+                    message: "Mail sended"
+                  }
+        "400":
+          description: "ZodError: invalid email"
+        "404":
+          description: "Not Found User Email"
+        "500":
+          description: "Error"
+  /api/sessions/reset-password?jwt:
+    post:
+      summary: Reset Password
+      tags:
+        - Session
+      parameters:
+        - in: path
+          name: jwt
+          description: 'Generated Jwt'
+          type: string
+          readOnly: true
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  password: "87654321"
+                }
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    status: "Success",
+                    message: "User changed password"
+                  }
+        "400":
+          description: "ZodError: invalid password"
+        "500":
+          description: "Error"
+       
+      
+      
+

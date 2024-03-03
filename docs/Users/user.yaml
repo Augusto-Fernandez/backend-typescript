@@ -1,0 +1,398 @@
+paths:
+  /api/users/:
+    get:
+      summary: Get all users - Admin Only
+      tags:
+        - User
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  [
+                    {
+                      userName: "example1",
+                      email: "example1@gmail.com",
+                      cart: [],
+                      role: [],
+                      isAdmin: false,
+                      password: "encrypted password",
+                      last_connection: "last connection date",
+                      _id: "Id generated",
+                      createdAt: "doc creation date",
+                      updatedAt: "doc last update",
+                      __v: "doc version"
+                    },
+                    {
+                      userName: "example2",
+                      email: "example2@gmail.com",
+                      cart: [],
+                      role: [],
+                      isAdmin: false,
+                      password: "encrypted password",
+                      last_connection: "last connection date",
+                      _id: "Id generated",
+                      createdAt: "doc creation date",
+                      updatedAt: "doc last update",
+                      __v: "doc version"
+                    },
+                    {
+                      userName: "example3",
+                      email: "example3@gmail.com",
+                      cart: [],
+                      role: [],
+                      isAdmin: false,
+                      password: "encrypted password",
+                      last_connection: "last connection date",
+                      _id: "Id generated",
+                      createdAt: "doc creation date",
+                      updatedAt: "doc last update",
+                      __v: "doc version"
+                    }
+                  ]
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+    post:
+      summary: Create User - Admin Only
+      tags:
+        - User
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  userName: "example",
+                  email: "example@gmail.com",
+                  password: "12345678"
+                }
+      responses:
+        "201":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    userName: "example",
+                    email: "example@gmail.com",
+                    cart: [],
+                    role: [],
+                    isAdmin: false,
+                    password: "encrypted password",
+                    last_connection: "last connection date",
+                    _id: "Id generated",
+                    createdAt: "doc creation date",
+                    updatedAt: "doc last update",
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid type"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+  /api/users/{id}:
+    get:
+      summary: Get an user - Admin Only
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          description: 'User Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    userName: "example",
+                    email: "example@gmail.com",
+                    cart: [],
+                    role: [],
+                    isAdmin: false,
+                    password: "encrypted password",
+                    last_connection: "last connection date",
+                    _id: "Param Id",
+                    createdAt: "doc creation date",
+                    updatedAt: "doc last update",
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+    put:
+      summary: Update user - Admin Only
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          description: 'User Id'
+          type: string
+          readOnly: true
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  userName: "example2",
+                  email: "example@gmail.com",
+                  password: "12345678"
+                }
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    userName: "example2",
+                    email: "example@gmail.com",
+                    cart: [],
+                    role: [],
+                    isAdmin: false,
+                    password: "encrypted password",
+                    last_connection: "last connection date",
+                    _id: "Param Id",
+                    createdAt: "doc creation date",
+                    updatedAt: "doc last update",
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format / invalid type"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+    delete:
+      summary: Delete user - Admin Only
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          description: 'User Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+  /api/users/{id}/roles/{rid}:
+    put:
+      summary: Add Role to User - Admin Only
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          description: 'User Id'
+          type: string
+          readOnly: true
+        - in: path
+          name: rid
+          description: 'Role Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    userName: "example",
+                    email: "example@gmail.com",
+                    cart: [],
+                    role: ["Role Id"],
+                    isAdmin: false,
+                    password: "encrypted password",
+                    last_connection: "last connection date",
+                    _id: "User Id",
+                    createdAt: "doc creation date",
+                    updatedAt: "doc last update",
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404/ User Id":
+          description: "Not Found Id"
+        "404/ Role Id":
+          description: "Not Found Role"
+        "500":
+          description: "Error"
+  /api/users/{id}/roles:
+    put:
+      summary: Delete all User's roles - Admin Only
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          description: 'User Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    userName: "example",
+                    email: "example@gmail.com",
+                    cart: [],
+                    role: [],
+                    isAdmin: false,
+                    password: "encrypted password",
+                    last_connection: "last connection date",
+                    _id: "User Id",
+                    createdAt: "doc creation date",
+                    updatedAt: "doc last update",
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+  /api/users/{id}/carts/{cid}:
+    put:
+      summary: Add Cart to User
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          description: 'User Id'
+          type: string
+          readOnly: true
+        - in: path
+          name: cid
+          description: 'Cart Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    userName: "example",
+                    email: "example@gmail.com",
+                    cart: ["Cart Id"],
+                    role: [],
+                    isAdmin: false,
+                    password: "encrypted password",
+                    last_connection: "last connection date",
+                    _id: "User Id",
+                    createdAt: "doc creation date",
+                    updatedAt: "doc last update",
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404/ User Id":
+          description: "Not Found User"
+        "404/ Cart Id":
+          description: "Not Found Cart"
+        "404":
+          description: "User Has Cart Already"  
+        "500":
+          description: "Error"
+  /api/users/{id}/carts:
+    put:
+      summary: Delete User's Cart
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          description: 'User Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    userName: "example",
+                    email: "example@gmail.com",
+                    cart: [],
+                    role: [],
+                    isAdmin: false,
+                    password: "encrypted password",
+                    last_connection: "last connection date",
+                    _id: "User Id",
+                    createdAt: "doc creation date",
+                    updatedAt: "doc last update",
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"

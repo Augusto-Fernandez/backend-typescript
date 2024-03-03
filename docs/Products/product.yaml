@@ -1,0 +1,232 @@
+paths:
+  /api/products/:
+    get:
+      summary: Get all products
+      tags:
+        - Products
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  [
+                    {
+                      title: 'Test Product 1',
+                      description: 'Test Description',
+                      price: 1,
+                      thumbnail: 'Test Thumbnail',
+                      code: '1111111111111',
+                      stock: 1,
+                      status: true,
+                      enable: true,
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    },
+                    {
+                      title: 'Test Product 2',
+                      description: 'Test Description',
+                      price: 1,
+                      thumbnail: 'Test Thumbnail',
+                      code: '1111111111111',
+                      stock: 1,
+                      status: true,
+                      enable: true,
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    },
+                    {
+                      title: 'Test Product 3',
+                      description: 'Test Description',
+                      price: 1,
+                      thumbnail: 'Test Thumbnail',
+                      code: '1111111111111',
+                      stock: 1,
+                      status: true,
+                      enable: true,
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    }
+                  ]
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+    post:
+      summary: Create Product - Admin Only
+      tags:
+        - Products
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  title: "Test Product",
+                  description: "Test Description",
+                  price: 1,
+                  thumbnail: "Test Thumbnail",
+                  code: "1111111111111",
+                  stock: 1,
+                  status: true,
+                }
+      responses:
+        "201":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    title: 'Test Product 3',
+                    description: 'Test Description',
+                    price: 1,
+                    thumbnail: 'Test Thumbnail',
+                    code: '1111111111111',
+                    stock: 1,
+                    status: true,
+                    enable: true,
+                    _id: 'Id generated',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid type"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+  /api/products/{id}:
+    get:
+      summary: Get a product
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          description: 'Product Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    title: 'Test Product',
+                    description: 'Test Description',
+                    price: 1,
+                    thumbnail: 'Test Thumbnail',
+                    code: '1111111111111',
+                    stock: 1,
+                    status: true,
+                    enable: true,
+                    _id: 'Product Id',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+    put:
+      summary: Update a product - Admin Only
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          description: 'Product Id'
+          type: string
+          readOnly: true
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  title: "Updated Product",
+                  description: "Updated Description",
+                  price: 1,
+                  thumbnail: "Updated Thumbnail",
+                  code: "1111111111111",
+                  stock: 1,
+                  status: true,
+                }
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    title: "Updated Product",
+                    description: "Updated Description",
+                    price: 1,
+                    thumbnail: "Updated Thumbnail",
+                    code: "1111111111111",
+                    stock: 1,
+                    status: true,
+                    enable: true,
+                    _id: 'Product Id',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format / invalid type"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+    delete:
+      summary: Delete a product - Admin Only
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          description: 'Product Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"

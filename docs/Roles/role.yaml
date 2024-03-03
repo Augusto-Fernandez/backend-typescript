@@ -1,0 +1,190 @@
+paths:
+  /api/roles/:
+    get:
+      summary: Get all roles
+      tags:
+        - Roles
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  [
+                    {
+                      name: 'Prueba 1',
+                      permissions: [ 'Rol de Prueba' ],
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    },
+                    {
+                      name: 'Prueba 2',
+                      permissions: [ 'Rol de Prueba' ],
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    },
+                    {
+                      name: 'Prueba 3',
+                      permissions: [ 'Rol de Prueba' ],
+                      _id: 'Id generated',
+                      createdAt: 'doc creation date',
+                      updatedAt: 'doc last update',
+                      __v: "doc version"
+                    }
+                  ]
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+    post:
+      summary: Create Role - Admin Only
+      tags:
+        - Roles
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  name: "Prueba",
+                  permissions: [
+                      "Rol de Prueba"
+                  ]
+                }
+      responses:
+        "201":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    name: 'Prueba',
+                    permissions: [ 'Rol de Prueba' ],
+                    _id: 'Id generated',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid type"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "500":
+          description: "Error"
+  /api/roles/{id}:
+    get:
+      summary: Get a role
+      tags:
+        - Roles
+      parameters:
+        - in: path
+          name: id
+          description: 'Role Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    name: 'Prueba',
+                    permissions: [ 'Rol de Prueba' ],
+                    _id: 'Role Id',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+    put:
+      summary: Update a role - Admin Only
+      tags:
+        - Roles
+      parameters:
+        - in: path
+          name: id
+          description: 'Role Id'
+          type: string
+          readOnly: true
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              example:
+                {
+                  name: "Update Prueba",
+                  permissions: [
+                      "Update Rol de Prueba"
+                  ]
+                }
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                example:
+                  {
+                    name: 'Update Prueba',
+                    permissions: [ 'Update Rol de Prueba' ],
+                    _id: 'Role Id',
+                    createdAt: 'doc creation date',
+                    updatedAt: 'doc last update',
+                    __v: "doc version"
+                  }
+        "400":
+          description: "ZodError: invalid id format / invalid type"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
+    delete:
+      summary: Delete a role - Admin Only
+      tags:
+        - Roles
+      parameters:
+        - in: path
+          name: id
+          description: 'Role Id'
+          type: string
+          readOnly: true
+      responses:
+        "200":
+          description: "Success"
+        "400":
+          description: "ZodError: invalid id format"
+        "401/header":
+          description: "Empty authentication header!"
+        "401/auth":
+          description: "Not authorized"
+        "404":
+          description: "Not Found Id"
+        "500":
+          description: "Error"
