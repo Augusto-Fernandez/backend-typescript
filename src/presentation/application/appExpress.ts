@@ -18,8 +18,8 @@ import errorHandler from "../middlewares/errorHandler";
 import swaggerOptions from "../../config/swaggerConfig";
 
 class AppExpress{
-    app: Express;
-    server!: Server;
+    private app: Express;
+    private server: Server | null = null;
     
     constructor(){
         this.app = express();
